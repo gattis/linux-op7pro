@@ -118,3 +118,7 @@ static void __exit opchain_exit_module(void)
 }
 
 module_exit(opchain_exit_module);
+
+MODULE_AUTHOR("tedlin");
+MODULE_DESCRIPTION("Oneplus Opchain");
+MODULE_LICENSE("GPL v2");
