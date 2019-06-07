@@ -268,7 +268,8 @@ cmd_gzip = (cat $(filter-out FORCE,$^) | gzip -n -f -9 > $@) || \
 
 # DTC
 # ---------------------------------------------------------------------------
-DTC ?= $(objtree)/scripts/dtc/dtc
+#DTC ?= $(objtree)/scripts/dtc/dtc
+DTC := /usr/bin/dtc
 
 # Disable noisy checks by default
 
@@ -281,8 +282,13 @@ DTC_FLAGS += -Wno-simple_bus_reg \
 	-Wno-pci_device_bus_num \
 	-Wno-pci_device_reg \
 	-Wno-avoid_default_addr_size \
-	-Wno-reg_format
-	
+	-Wno-reg_format \
+	-Wno-interrupts_property \
+	-Wno-gpios_property \
+	-Wno-clocks_property \
+	-Wno-graph_port	\
+	-Wno-alias_paths \
+	-Wno-cooling_device_property
 
 
 DTC_FLAGS += -Wno-node_name_chars_strict \
@@ -312,7 +318,7 @@ $(obj)/%.dtb.S: $(obj)/%.dtb
 ifneq ($(DTC_EXT),)
 DTC = $(DTC_EXT)
 else
-DTC = $(objtree)/scripts/dtc/dtc
+DTC = /usr/bin/dtc
 endif
 
 quiet_cmd_dtc = DTC     $@
