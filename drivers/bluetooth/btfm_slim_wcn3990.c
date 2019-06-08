@@ -10,7 +10,7 @@
  * GNU General Public License for more details.
  */
 #include <linux/slimbus/slimbus.h>
-#include <btfm_slim.h>
+#include "btfm_slim.h"
 #include <btfm_slim_wcn3990.h>
 
 /* WCN3990 Port assignment */
