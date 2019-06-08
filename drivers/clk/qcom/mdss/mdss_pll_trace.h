@@ -20,7 +20,7 @@
 #undef TRACE_SYSTEM
 #define TRACE_SYSTEM mdss_pll
 #undef TRACE_INCLUDE_PATH
-#define TRACE_INCLUDE_PATH ../../clk/qcom/mdss
+#define TRACE_INCLUDE_PATH ../../drivers/clk/qcom/mdss
 #undef TRACE_INCLUDE_FILE
 #define TRACE_INCLUDE_FILE mdss_pll_trace
 
