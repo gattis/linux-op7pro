@@ -1,24 +1,18 @@
-export KERNEL="Image"
-export DTBIMAGE="dtb"
-export CLANG_PATH="${HOME}/Android/Sdk/ndk-bundle/toolchains/llvm/prebuilt/linux-x86_64/bin"
-export PATH=${CLANG_PATH}:${PATH}
-export CLANG_TRIPLE=aarch64-linux-gnu-
-export CROSS_COMPILE="${HOME}/Android/Sdk/ndk-bundle/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android-"
-export CC=clang
-export CXX=clang++
-export CROSS_COMPILE_ARM32="${HOME}/Android/Sdk/ndk-bundle/toolchains/llvm/prebuilt/linux-x86_64/bin/armv7a-linux-androideabi-"
-export KBUILD_COMPILER_STRING=$(~/Android/Sdk/ndk-bundle/toolchains/llvm/prebuilt/linux-x86_64/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')
+
+#export CLANG_PATH="${HOME}/Android/Sdk/ndk-bundle/toolchains/llvm/prebuilt/linux-x86_64/bin"
+#export PATH=${CLANG_PATH}:${PATH}
+#export CLANG_TRIPLE=aarch64-linux-gnu-
+#export CROSS_COMPILE="${HOME}/Android/Sdk/ndk-bundle/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android-"
+export ARCH=arm64
+export CROSS_COMPILE=aarch64-linux-gnu-
+
 export DEFCONFIG="vendor/sm8150-perf_defconfig"
-
-# Kernel Details
-export VER=".1.0.0"
-
 export SMURF="${HOME}/1p7/smurf"
 
 # Paths
 export KERNEL_DIR="${SMURF}/stock"
 export DIST_DIR="${SMURF}/dist"
-export SMAKE="make CC=${CC} CXX=${CXX} O=${KERNEL_DIR}/out"
+export SMAKE="make O=${KERNEL_DIR}/out"
 
 # Functions
 function clean_all {
@@ -43,18 +37,14 @@ function save_config {
 
 function make_kernel {
     cd $KERNEL_DIR
+    echo $SMAKE $DEFCONFIG
     $SMAKE $DEFCONFIG
     $SMAKE nconfig 
     $SMAKE -j32
-    #cd techpack/audio
-    #$SMAKE -C $KERNEL_DIR M=$PWD -j32 modules
-    #cd $KERNEL_DIR
+
 }
 
 
-function make_dtb {
-    $REPACK_DIR/tools/dtbToolCM -2 -o $REPACK_DIR/$DTBIMAGE -s 2048 -p scripts/dtc/ arch/arm64/boot/
-}
 
 function package_all {
 	 set -o errtrace
@@ -81,14 +71,8 @@ DATE_START=$(date +"%s")
 
 
 # Vars
-BASE_AK_VER="Stock"
-AK_VER="$BASE_AK_VER$VER"
-export LOCALVERSION=~`echo $AK_VER`
-export LOCALVERSION=~`echo $AK_VER`
-export ARCH=arm64
-export SUBARCH=arm64
-export KBUILD_BUILD_USER=pappschlumpf
-export KBUILD_BUILD_HOST=Gargamel
+
+
 
 
 
