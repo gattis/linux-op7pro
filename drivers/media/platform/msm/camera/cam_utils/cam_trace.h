@@ -14,6 +14,12 @@
 #if !defined(_CAM_TRACE_H) || defined(TRACE_HEADER_MULTI_READ)
 #define _CAM_TRACE_H
 
+#include <linux/tracepoint.h>
+#include <media/cam_req_mgr.h>
+#include "../cam_req_mgr/cam_req_mgr_core.h"
+#include "../cam_req_mgr/cam_req_mgr_interface.h"
+#include "../cam_core/cam_context.h"
+
 #undef TRACE_SYSTEM
 #define TRACE_SYSTEM camera
 #undef TRACE_INCLUDE_PATH
@@ -21,11 +27,7 @@
 #undef TRACE_INCLUDE_FILE
 #define TRACE_INCLUDE_FILE cam_trace
 
-#include <linux/tracepoint.h>
-#include <media/cam_req_mgr.h>
-#include "cam_req_mgr_core.h"
-#include "cam_req_mgr_interface.h"
-#include "cam_context.h"
+
 
 TRACE_EVENT(cam_context_state,
 	TP_PROTO(const char *name, struct cam_context *ctx),
